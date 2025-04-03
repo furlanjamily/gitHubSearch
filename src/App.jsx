@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import imageGithub from './assets/imageGithub.png';
-import Search from './assets/Search.png';
+import imageGit from './assets/imageGit.png';
+import imageSearch from './assets/imageSearch.png';
+
 
 
 export default function App() {
@@ -15,29 +17,35 @@ export default function App() {
       <div className="flex flex-col w-full h-full max-w-[1156px] max-h-[537px] items-center bg-black">
 
         {/* Cabeçalho */}
-        <div className="flex w-[384px] h-[82] items-center text-center pt-[39px]">
-          <div className='h-[58px] w-[58px] mr-[11px]'>
-            <img src={imageGithub} alt="Imagem GitHub" className="h-full w-full" />
+        <div className="flex w-[384px] h-[82px] items-center pt-[39px]">
+          <div className='w-[58px] h-[58px] mr-[11px]'>
+            <img src={imageGithub} alt="Icon GitHub" className="h-full w-full" />
           </div>
-          <p className="flex text-white text-6xl font-semibold">
-            Perfil <span className='ml-[11px]'>GitHub</span>
-          </p>
-
-          
+          <div className="flex items-center text-white text-6xl font-semibold">
+            Perfil
+            <img
+              src={imageGit}
+              alt="Imagem GitHub"
+              className="ml-[11px] w-[160px] h-[45px]"
+            />
+          </div>
         </div>
 
 
         {/* Campo de pesquisa */}
-        <div className="mt-[27px]">
+        <div className="flex mt-[27px] items-center bg-white border rounded-[10px]">
           <input
             type="text"
             value={user}
             onChange={(e) => setUser(e.target.value)}
             placeholder="Digite um usuário do Github"
-            className="w-[503px] h-[62px] p-4 text-xl font-semibold bg-white"
+            className="w-[503px] h-[62px] p-4 text-xl font-semibold rounded-[10px]"
           />
-          <button onClick={handleSearch}>
-          <img src={Search} alt="Imagem Pesquisa" className="h-full w-full" />
+          <button
+            onClick={handleSearch}
+            className="flex justify-center items-center w-[62px] h-[62px] bg-[#005CFF] rounded-[10px]"
+          >
+            <img src={imageSearch} alt="Icon Pesquisa" className="w-[25px] h-[25px]" />
           </button>
 
         </div>
