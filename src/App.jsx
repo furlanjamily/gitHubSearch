@@ -2,6 +2,7 @@ import { useState } from 'react';
 import imageGithub from './assets/imageGithub.png';
 import imageGit from './assets/imageGit.png';
 import imageSearch from './assets/imageSearch.png';
+import Camada1 from './assets/Camada_1.png';
 
 export default function App() {
   const [username, setUsername] = useState("");
@@ -32,11 +33,12 @@ export default function App() {
   };
 
   return (
-    <div className="flex w-full h-screen justify-center items-center bg-[#1F1F1F] overflow:hidden">
-      <div className="flex flex-col w-full h-full max-w-[1156px] max-h-[537px] items-center bg-black">
+    <div className=" relative flex w-screen h-screen justify-center items-center bg-[#1F1F1F] overflow-clip">
+      <div className="flex flex-col w-full h-full max-w-[1156px] max-h-[537px] items-center bg-black z-10">
+
 
         {/* Cabeçalho */}
-        <div className="flex w-[384px] h-[82px] items-center pt-[39px] pb-[27px]">
+        <div className="flex w-[384px] h-[82px] items-center pt-[39px] pb-[27px] z-0">
           <div className='w-[58px] h-[58px] mr-[11px]'>
             <img src={imageGithub} alt="Icon GitHub" className="h-full w-full" />
           </div>
@@ -93,7 +95,6 @@ export default function App() {
         )}
 
         {/* Usuário não encontrado */}
-
         {notFound && (
           <div className="flex flex-col justify-center items-center w-[710px] h-[88px] mt-[33px] bg-[#D9D9D9] text-[#FF0000] font-normal 
           size-5 border rounded-[10px]">
@@ -101,9 +102,15 @@ export default function App() {
             <p>Tente novamente</p>
           </div>
         )}
-
-
       </div>
+      
+      {/* Div para o background */}
+      <div className="absolute size-[530px] bg-[#005CFF] top-0 right-0 -mt-96 -mr-44 blur-[100px] rounded-full" />
+      <div className="absolute size-[230px] bg-[#005CFF] top-0 left-0 mt-96 -ml-44 blur-[100px] rounded-full" />
+      <div className="absolute top-0 left-0 right-0 mt-0 ml-[71px]">
+        <img src={Camada1} alt="Icon Background" className="w-[239px] h-[225px]" />
+      </div>
+
     </div>
   );
 }
