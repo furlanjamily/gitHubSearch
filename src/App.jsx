@@ -3,34 +3,47 @@ import imageGithub from './assets/imageGithub.png';
 import imageGit from './assets/imageGit.png';
 import imageSearch from './assets/imageSearch.png';
 import Camada1 from './assets/Camada_1.png';
+import loadingGif from './assets/gifCarregamento.gif';
+
 
 export default function App() {
   const [username, setUsername] = useState("");
   const [userData, setUserData] = useState(null);
   const [notFound, setNotFound] = useState(false);
+  const [loading, setLoading] = useState(false);
 
 
   // Fetch para pesquisar pelo nome do usuário
   const handleSearch = () => {
     if (!username.trim()) return;
+    setLoading(true); // Ativa o loader
 
     fetch(`https://api.github.com/users/${username}`)
       .then((res) => res.json())
       .then((data) => {
-        if (data.message === "Not Found") {
-          setUserData(null);
-          setNotFound(true);
-        } else {
-          setUserData(data);
-          setNotFound(false);
-        }
+        setTimeout(() => { 
+          if (data.message === "Not Found") {
+            setUserData(null);
+            setNotFound(true);
+          } else {
+            setUserData(data);
+            setNotFound(false);
+          }
+
+          setLoading(false);
+        }, 1000); // Espera 1 segundo para remover o loading
       })
+
       .catch((error) => {
         console.error("Erro ao buscar usuário:", error);
-        setUserData(null);
-        setNotFound(true);
+        setTimeout(() => {
+          setUserData(null);
+          setNotFound(true);
+          setLoading(false);
+        }, 1000);
       });
   };
+
 
   return (
     <div className=" relative flex w-screen h-screen justify-center items-center bg-[#1F1F1F] overflow-clip">
@@ -63,8 +76,19 @@ export default function App() {
             className="w-[503px] h-[62px] p-4 text-xl font-semibold rounded-[10px]"
           />
 
+          {/* Efeito do carregamento para requisição */}
+          {loading && (
+            <img
+              src={loadingGif}
+              alt="Carregando"
+              className="flex"
+            />
+          )}
+
+
           <button
             onClick={handleSearch}
+            disabled={loading}
             className="flex justify-center items-center w-[62px] h-[62px] bg-[#005CFF] rounded-[10px]"
           >
             <img src={imageSearch} alt="Icon Pesquisa" className="w-[25px] h-[25px]" />
@@ -103,10 +127,10 @@ export default function App() {
           </div>
         )}
       </div>
-      
+
       {/* Div para o background */}
-      <div className="absolute size-[530px] bg-[#005CFF] top-0 right-0 -mt-96 -mr-44 blur-[100px] rounded-full" />
-      <div className="absolute size-[230px] bg-[#005CFF] top-0 left-0 mt-96 -ml-44 blur-[100px] rounded-full" />
+      <div className="absolute size-[530px] bg-[#005CFF] top-0 right-0 -mt-96 -mr-44 blur-[100px] rounded-full" /> // Topo
+      <div className="absolute size-[230px] bg-[#005CFF] top-0 left-0 mt-96 -ml-44 blur-[100px] rounded-full" />   // Borda
       <div className="absolute top-0 left-0 right-0 mt-0 ml-[71px]">
         <img src={Camada1} alt="Icon Background" className="w-[239px] h-[225px]" />
       </div>
@@ -114,4 +138,6 @@ export default function App() {
     </div>
   );
 }
+
+// Topo
 
