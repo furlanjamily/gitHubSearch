@@ -3,7 +3,7 @@ import imageGithub from './assets/imageGithub.png';
 import imageGit from './assets/imageGit.png';
 import imageSearch from './assets/imageSearch.png';
 import Camada1 from './assets/Camada_1.png';
-import loadingGif from './assets/gifCarregamento.gif';
+import Loading from './assets/loader.svg';
 
 
 export default function App() {
@@ -21,7 +21,7 @@ export default function App() {
     fetch(`https://api.github.com/users/${username}`)
       .then((res) => res.json())
       .then((data) => {
-        setTimeout(() => { 
+        setTimeout(() => {
           if (data.message === "Not Found") {
             setUserData(null);
             setNotFound(true);
@@ -76,14 +76,6 @@ export default function App() {
             className="w-[503px] h-[62px] p-4 text-xl font-semibold rounded-[10px]"
           />
 
-          {/* Efeito do carregamento para requisição */}
-          {loading && (
-            <img
-              src={loadingGif}
-              alt="Carregando"
-              className="flex"
-            />
-          )}
 
 
           <button
@@ -91,7 +83,17 @@ export default function App() {
             disabled={loading}
             className="flex justify-center items-center w-[62px] h-[62px] bg-[#005CFF] rounded-[10px]"
           >
-            <img src={imageSearch} alt="Icon Pesquisa" className="w-[25px] h-[25px]" />
+            {loading ? (
+              <img
+                src={Loading}
+                alt="Carregando"
+                className="flex animate-spin"
+              />
+
+            ) : (
+              <img src={imageSearch} alt="Icon Pesquisa" className="w-[25px] h-[25px]" />
+            )}
+
           </button>
         </div>
 
