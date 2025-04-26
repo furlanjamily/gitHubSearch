@@ -14,9 +14,10 @@ export default function App() {
 
 
   // Fetch para pesquisar pelo nome do usuário
+
   const handleSearch = () => {
     if (!username.trim()) return;
-    setLoading(true); // Ativa o loader
+    setLoading(true);
 
     fetch(`https://api.github.com/users/${username}`)
       .then((res) => res.json())
@@ -31,7 +32,7 @@ export default function App() {
           }
 
           setLoading(false);
-        }, 1000); // Espera 1 segundo para remover o loading
+        }, 1000);
       })
 
       .catch((error) => {
@@ -131,8 +132,8 @@ export default function App() {
       </div>
 
       {/* Div para o background */}
-      <div className="absolute size-[530px] bg-[#005CFF] top-0 right-0 -mt-96 -mr-44 blur-[100px] rounded-full" /> // Topo
-      <div className="absolute size-[230px] bg-[#005CFF] top-0 left-0 mt-96 -ml-44 blur-[100px] rounded-full" />   // Borda
+      <div className="absolute size-[530px] bg-[#005CFF] top-0 right-0 -mt-96 -mr-44 blur-[100px] rounded-full" /> 
+      <div className="absolute size-[230px] bg-[#005CFF] top-0 left-0 mt-96 -ml-44 blur-[100px] rounded-full" />   
       <div className="absolute top-0 left-0 right-0 mt-0 ml-[71px]">
         <img src={Camada1} alt="Icon Background" className="w-[239px] h-[225px]" />
       </div>
@@ -141,5 +142,4 @@ export default function App() {
   );
 }
 
-// Topo
 
